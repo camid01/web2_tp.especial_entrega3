@@ -6,7 +6,25 @@ class buysModel extends Model {
         $query = $this->db->prepare('SELECT * FROM clientes');
         $query->execute();
 
-        // $tasks es un arreglo de tareas
+        $customers = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $customers;
+    }
+
+
+    function getCustomersAsc(){
+        $query = $this->db->prepare('SELECT * FROM clientes ORDER BY Nombre ASC');
+        $query->execute();
+
+        $customers = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $customers;
+    }
+
+    function getCustomersDesc(){
+        $query = $this->db->prepare('SELECT * FROM clientes ORDER BY Nombre DESC');
+        $query->execute();
+
         $customers = $query->fetchAll(PDO::FETCH_OBJ);
 
         return $customers;

@@ -11,11 +11,26 @@ class buysController extends ApiController{
         parent::__construct();
     }
     //GET
-    public function get($params = []) {
-        if (empty($params)){
+    public function get() {
+    
+        if(isset($_GET['order'])){
+            $order = ($_GET['order']);
+            if ($order == 'asc') {
+                // Ordenar la lista ascendente
+                $ordenAsc = $this->model->getCustomersAsc();
+                $this->view->response($ordenAsc, 200);
+            } 
+            elseif($order == 'desc'){
+                // Ordenar la lista descendente
+                $ordenDesc = $this->model->getCustomersDesc();
+                $this->view->response($ordenDesc, 200);
+            }
+        }
+        else{
+            // Sin especificar orden
             $clientes = $this->model->getCustomers();
             $this->view->response($clientes, 200);
-        }
+        } 
     }
 
     //GET
